@@ -1,14 +1,12 @@
 """Feature engineering and model benchmarking."""
 
 import json
-from pathlib import Path
 
 import joblib
-import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
-from sklearn.linear_model import Ridge, Lasso, TweedieRegressor
+from sklearn.linear_model import Lasso, Ridge, TweedieRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import KFold, cross_validate, train_test_split
 from sklearn.pipeline import Pipeline

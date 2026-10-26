@@ -22,6 +22,7 @@ insurance_costs = ["templates/*.j2"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+filterwarnings = ["ignore:.*deprecated - use:DeprecationWarning"]
 
 [tool.ruff]
 line-length = 100

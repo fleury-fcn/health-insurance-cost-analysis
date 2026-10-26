@@ -2,9 +2,9 @@
 
 import json
 
+import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.inspection import PartialDependenceDisplay
-import matplotlib.pyplot as plt
 
 from .config import ARTIFACT_DIR
 from .modeling import feature_frame

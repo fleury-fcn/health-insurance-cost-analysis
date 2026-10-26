@@ -1,9 +1,8 @@
 """Generate a self-contained HTML report."""
 
-import json
 from pathlib import Path
 
-from .config import ARTIFACT_DIR, REPORT_DIR
+from .config import REPORT_DIR
 
 
 def generate_report(audit: dict, statistics: dict, metrics: dict) -> Path:

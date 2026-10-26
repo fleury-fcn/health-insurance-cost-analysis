@@ -1,0 +1,435 @@
+{
+  "alpha": 0.05,
+  "n": 1337,
+  "mean_ci95_t": [
+    12629.391284827158,
+    13928.851688484738
+  ],
+  "mean_ci95_bootstrap": [
+    12631.842825877131,
+    13939.105630921056
+  ],
+  "smoker": {
+    "question": "Les fumeurs coûtent-ils plus cher que les non-fumeurs ?",
+    "groups": [
+      "yes",
+      "no"
+    ],
+    "n": [
+      274,
+      1063
+    ],
+    "means": [
+      32050.23183153284,
+      8440.660306508937
+    ],
+    "medians": [
+      34456.348450000005,
+      7345.7266
+    ],
+    "assumptions": {
+      "shapiro_p_min": 1.5035032808411558e-28,
+      "normality_ok": false,
+      "levene_p": 1.670117565125241e-66,
+      "equal_variance_ok": false
+    },
+    "student_t": {
+      "statistic": 46.64479459840305,
+      "p_value": 1.4067220949376498e-282
+    },
+    "welch_t": {
+      "statistic": 32.7423097372529,
+      "p_value": 6.261720774727631e-103,
+      "ci95_mean_diff": [
+        22190.79008570521,
+        25028.3529643426
+      ]
+    },
+    "mann_whitney": {
+      "statistic": 283859.0,
+      "p_value": 5.74701188239214e-130,
+      "rank_biserial": 0.9491660429441533
+    },
+    "bootstrap_ci95_mean_diff": [
+      22186.004958438178,
+      25039.12293110282
+    ],
+    "bootstrap_ci95_median_diff": [
+      22102.450416875003,
+      28895.2269825
+    ],
+    "hedges_g": 3.1585145001400527,
+    "hedges_g_magnitude": "fort",
+    "rank_biserial_magnitude": "fort",
+    "decision_test": "Mann-Whitney + Welch/bootstrap"
+  },
+  "sex": {
+    "question": "Les coûts diffèrent-ils entre hommes et femmes ?",
+    "groups": [
+      "male",
+      "female"
+    ],
+    "n": [
+      675,
+      662
+    ],
+    "means": [
+      13974.998863762965,
+      12569.578843835347
+    ],
+    "medians": [
+      9377.9047,
+      9412.9625
+    ],
+    "assumptions": {
+      "shapiro_p_min": 1.8303726201913448e-27,
+      "normality_ok": false,
+      "levene_p": 0.0016672604848662713,
+      "equal_variance_ok": false
+    },
+    "student_t": {
+      "statistic": 2.124391307062026,
+      "p_value": 0.0338207919951195
+    },
+    "welch_t": {
+      "statistic": 2.1275372170149476,
+      "p_value": 0.033561547636765776,
+      "ci95_mean_diff": [
+        109.50078688180997,
+        2701.3392529734265
+      ]
+    },
+    "mann_whitney": {
+      "statistic": 226198.0,
+      "p_value": 0.6944793894954917,
+      "rank_biserial": 0.01241132371041731
+    },
+    "bootstrap_ci95_mean_diff": [
+      124.15518611385684,
+      2725.6158046532614
+    ],
+    "bootstrap_ci95_median_diff": [
+      -955.5123612499999,
+      1242.2542049999984
+    ],
+    "hedges_g": 0.11613823943404523,
+    "hedges_g_magnitude": "négligeable",
+    "rank_biserial_magnitude": "négligeable",
+    "decision_test": "Mann-Whitney + Welch/bootstrap"
+  },
+  "region": {
+    "question": "Les coûts diffèrent-ils selon la région ?",
+    "levels": [
+      "northeast",
+      "northwest",
+      "southeast",
+      "southwest"
+    ],
+    "n": [
+      324,
+      324,
+      364,
+      325
+    ],
+    "means": [
+      13406.384516385804,
+      12450.840843950617,
+      14735.411437609888,
+      12346.937377292308
+    ],
+    "assumptions": {
+      "shapiro_p_min": 2.0237675743700212e-20,
+      "normality_ok": false,
+      "levene_p": 0.0008689544824002284,
+      "equal_variance_ok": false
+    },
+    "anova": {
+      "statistic": 2.926139903662777,
+      "p_value": 0.03276288025444947,
+      "eta2": 0.006542376581730343,
+      "omega2": 0.004303330785009212
+    },
+    "alexander_govern": {
+      "statistic": 7.664173325614388,
+      "p_value": 0.05348684849545782
+    },
+    "kruskal_wallis": {
+      "statistic": 4.622506584465555,
+      "p_value": 0.20161983372303882,
+      "epsilon2": 0.001217184234407768
+    },
+    "posthoc_mann_whitney_holm": [
+      {
+        "pair": "northeast vs northwest",
+        "p_holm": 0.6554517126541648
+      },
+      {
+        "pair": "northeast vs southeast",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "northeast vs southwest",
+        "p_holm": 0.22493787545845204
+      },
+      {
+        "pair": "northwest vs southeast",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "northwest vs southwest",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "southeast vs southwest",
+        "p_holm": 0.8438769898093916
+      }
+    ],
+    "eta2_magnitude": "négligeable"
+  },
+  "children": {
+    "question": "Les coûts diffèrent-ils selon le nombre d'enfants ?",
+    "levels": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "n": [
+      573,
+      324,
+      240,
+      157,
+      25,
+      18
+    ],
+    "means": [
+      12384.69534422164,
+      12731.171831635802,
+      15073.563733958332,
+      15355.318366815285,
+      13850.6563112,
+      8786.035247222222
+    ],
+    "assumptions": {
+      "shapiro_p_min": 5.448651955110346e-25,
+      "normality_ok": false,
+      "levene_p": 0.06510205444610025,
+      "equal_variance_ok": true
+    },
+    "anova": {
+      "statistic": 3.2687344101195737,
+      "p_value": 0.006133448188169501,
+      "eta2": 0.01213029191410645,
+      "omega2": 0.008413042079506402
+    },
+    "alexander_govern": {
+      "statistic": 28.025909195022898,
+      "p_value": 3.597673264990529e-05
+    },
+    "kruskal_wallis": {
+      "statistic": 29.12066893697647,
+      "p_value": 2.1957270957731766e-05,
+      "epsilon2": 0.01812221557999735
+    },
+    "posthoc_mann_whitney_holm": [
+      {
+        "pair": "0 vs 1",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "0 vs 2",
+        "p_holm": 0.0027471442157042877
+      },
+      {
+        "pair": "0 vs 3",
+        "p_holm": 0.0010890374061397349
+      },
+      {
+        "pair": "0 vs 4",
+        "p_holm": 0.6149679833750038
+      },
+      {
+        "pair": "0 vs 5",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "1 vs 2",
+        "p_holm": 0.09841015643416996
+      },
+      {
+        "pair": "1 vs 3",
+        "p_holm": 0.006532497177067948
+      },
+      {
+        "pair": "1 vs 4",
+        "p_holm": 0.5341557522148384
+      },
+      {
+        "pair": "1 vs 5",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "2 vs 3",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "2 vs 4",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "2 vs 5",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "3 vs 4",
+        "p_holm": 1.0
+      },
+      {
+        "pair": "3 vs 5",
+        "p_holm": 0.5030207232956241
+      },
+      {
+        "pair": "4 vs 5",
+        "p_holm": 0.49295967043940353
+      }
+    ],
+    "eta2_magnitude": "faible"
+  },
+  "chi2_region_smoker": {
+    "question": "La prévalence du tabagisme dépend-elle de la région ?",
+    "table": {
+      "no": {
+        "northeast": 257,
+        "northwest": 266,
+        "southeast": 273,
+        "southwest": 267
+      },
+      "yes": {
+        "northeast": 67,
+        "northwest": 58,
+        "southeast": 91,
+        "southwest": 58
+      }
+    },
+    "chi2": 7.27790254132191,
+    "dof": 3,
+    "p_value": 0.06354826573182334,
+    "cramers_v": 0.07377978990310645,
+    "min_expected": 66.39940164547494,
+    "expected_ok": true,
+    "cramers_v_magnitude": "négligeable"
+  },
+  "chi2_sex_smoker": {
+    "question": "La prévalence du tabagisme dépend-elle du sexe ?",
+    "table": {
+      "no": {
+        "female": 547,
+        "male": 516
+      },
+      "yes": {
+        "female": 115,
+        "male": 159
+      }
+    },
+    "chi2": 7.469139330086637,
+    "dof": 1,
+    "p_value": 0.0062765550120107375,
+    "cramers_v": 0.07474283675068631,
+    "min_expected": 135.66791323859385,
+    "expected_ok": true,
+    "cramers_v_magnitude": "négligeable"
+  },
+  "adjusted_f_tests": {
+    "sex": {
+      "F": 13.671358189366982,
+      "df": [
+        1,
+        1327
+      ],
+      "p_value": 0.0002266324484116673,
+      "partial_eta2": 0.01019739707711122,
+      "relative_effects": {
+        "male vs female (vs female)": -0.08267857815379517
+      },
+      "note": "OLS sur log(coûts) : effets multiplicatifs, test F approximatif (résidus non parfaitement normaux)."
+    },
+    "region": {
+      "F": 8.60354911721971,
+      "df": [
+        3,
+        1327
+      ],
+      "p_value": 1.1719827623893818e-05,
+      "partial_eta2": 0.01907927573026392,
+      "relative_effects": {
+        "northwest (vs northeast)": -0.057938130657257246,
+        "southeast (vs northeast)": -0.13859681981479507,
+        "southwest (vs northeast)": -0.12825637286467667
+      },
+      "note": "OLS sur log(coûts) : effets multiplicatifs, test F approximatif (résidus non parfaitement normaux)."
+    }
+  },
+  "correlations": [
+    {
+      "variable": "age",
+      "pearson_r": 0.2983082125097864,
+      "pearson_p": 6.975748762691051e-29,
+      "pearson_ci95": [
+        0.24867327187389074,
+        0.3463805323668408
+      ],
+      "spearman_rho": 0.5335232787189862,
+      "spearman_p": 3.187755650322475e-99
+    },
+    {
+      "variable": "bmi",
+      "pearson_r": 0.19840083122624935,
+      "pearson_p": 2.4680404264513685e-13,
+      "pearson_ci95": [
+        0.1463455146813627,
+        0.24936041392211108
+      ],
+      "spearman_rho": 0.11958495819244366,
+      "spearman_p": 1.1637179203181515e-05
+    },
+    {
+      "variable": "children",
+      "pearson_r": 0.06738935083963249,
+      "pearson_p": 0.013717026292987116,
+      "pearson_ci95": [
+        0.01382736420317176,
+        0.12056570529375575
+      ],
+      "spearman_rho": 0.13220013322835855,
+      "spearman_p": 1.2303764274728683e-06
+    }
+  ],
+  "holm_adjusted_p": {
+    "smoker (Mann-Whitney)": 4.597609505913712e-129,
+    "sex (Mann-Whitney)": 0.6944793894954917,
+    "region (Kruskal-Wallis)": 0.40323966744607764,
+    "children (Kruskal-Wallis)": 0.0001317436257463906,
+    "region x smoker (chi2)": 0.19064479719547003,
+    "sex x smoker (chi2)": 0.02510622004804295,
+    "sex | controls (F)": 0.0011331622420583365,
+    "region | controls (F)": 8.203879336725673e-05
+  },
+  "figures": [
+    {
+      "name": "inference_group_ci",
+      "title": "Intervalles de confiance par groupe"
+    }
+  ],
+  "conclusions": [
+    "Hypothèses : les coûts ne sont normaux dans aucun groupe (Shapiro-Wilk p min = 1.5e-28) et les variances sont hétérogènes (Levene p < 0,001). Le t de Student et l'ANOVA classique sont donc fournis à titre indicatif ; les conclusions reposent sur Welch, Mann-Whitney, Kruskal-Wallis, Alexander-Govern et le bootstrap.",
+    "Tabagisme : les fumeurs coûtent en moyenne 23 610 $ de plus (IC 95 % bootstrap [22 186 ; 25 039] $). Mann-Whitney p < 0,001, corrélation rang-bisériale 0,95, g de Hedges 3,16 : effet très fort, résultat central de l'étude.",
+    "Sexe : écart brut de 1 405 $ en faveur des femmes (Welch p = 0,034, mais Mann-Whitney p = 0,694), effet négligeable. Cet écart brut vient surtout de la plus forte proportion de fumeurs chez les hommes. À profil égal (âge, IMC, enfants, tabagisme), le sens s'inverse : -8,3% pour un homme (p < 0,001, η² partiel 0,010). L'effet est détectable mais faible, et le sexe est un critère tarifaire interdit dans l'UE (arrêt Test-Achats, 2011).",
+    "Région : ANOVA p = 0,033 mais Kruskal-Wallis p = 0,202 et Alexander-Govern p = 0,053 (η² = 0,007, effet négligeable) : pas d'écart brut robuste. Ajusté des autres facteurs (p < 0,001, η² partiel 0,019), on observe un effet modéré par rapport au nord-est : northwest -5,8%, southeast -13,9%, southwest -12,8%.",
+    "Tabagisme × région : χ² p = 0,064, V de Cramér 0,07. Tabagisme × sexe : χ² p = 0,006, V = 0,07 (effectifs attendus tous ≥ 5, condition du χ² respectée). Dans les deux cas, l'association est faible.",
+    "Corrélations : âge r = 0,30 (IC 95 % [0,25 ; 0,35]), IMC r = 0,20 (IC 95 % [0,15 ; 0,25]).",
+    "Tests multiples : après correction de Holm sur les 8 tests de la famille, restent significatifs au seuil de 5 % : smoker (Mann-Whitney), children (Kruskal-Wallis), sex x smoker (chi2), sex | controls (F), region | controls (F).",
+    "Un p-value très faible ne mesure pas l'ampleur d'un effet. Les tailles d'effet montrent que le tabagisme écrase tous les autres facteurs catégoriels."
+  ]
+}
