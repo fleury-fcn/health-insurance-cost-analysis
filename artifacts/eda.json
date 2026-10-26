@@ -1,0 +1,215 @@
+{
+  "findings": {
+    "target": {
+      "mean": 13279.121486655948,
+      "median": 9386.1613,
+      "std": 12110.359656344175,
+      "min": 1121.8739,
+      "max": 63770.42801,
+      "skewness": 1.5136902413349014,
+      "kurtosis": 1.5937433292737193,
+      "log_skewness": -0.08973781209745355,
+      "top10_share": 0.31789152406099347,
+      "q": {
+        "0.1": 2358.52481,
+        "0.25": 4746.344,
+        "0.5": 9386.1613,
+        "0.75": 16657.71745,
+        "0.9": 34832.7416,
+        "0.99": 48537.79687800001
+      }
+    },
+    "features": {
+      "share_age_18_19": 0.10172026925953627,
+      "bmi_mean": 30.66345175766642,
+      "share_obese": 0.5280478683620045,
+      "bmi_skewness": 0.2835955670169306,
+      "share_smokers": 0.2049364248317128,
+      "share_male": 0.5048616305160808,
+      "region_shares": {
+        "southeast": 0.272,
+        "southwest": 0.243,
+        "northwest": 0.242,
+        "northeast": 0.242
+      }
+    },
+    "groups": {
+      "smoker": {
+        "no": {
+          "mean": 8440.660306508937,
+          "median": 7345.7266,
+          "n": 1063
+        },
+        "yes": {
+          "mean": 32050.23183153284,
+          "median": 34456.348450000005,
+          "n": 274
+        }
+      },
+      "sex": {
+        "female": {
+          "mean": 12569.578843835347,
+          "median": 9412.9625,
+          "n": 662
+        },
+        "male": {
+          "mean": 13974.998863762965,
+          "median": 9377.9047,
+          "n": 675
+        }
+      },
+      "region": {
+        "northeast": {
+          "mean": 13406.384516385804,
+          "median": 10057.652025,
+          "n": 324
+        },
+        "northwest": {
+          "mean": 12450.840843950617,
+          "median": 8976.97725,
+          "n": 324
+        },
+        "southeast": {
+          "mean": 14735.411437609888,
+          "median": 9294.131949999999,
+          "n": 364
+        },
+        "southwest": {
+          "mean": 12346.937377292308,
+          "median": 8798.593,
+          "n": 325
+        }
+      },
+      "children": {
+        "0": {
+          "mean": 12384.69534422164,
+          "median": 9863.4718,
+          "n": 573
+        },
+        "1": {
+          "mean": 12731.171831635802,
+          "median": 8483.870149999999,
+          "n": 324
+        },
+        "2": {
+          "mean": 15073.563733958332,
+          "median": 9264.97915,
+          "n": 240
+        },
+        "3": {
+          "mean": 15355.318366815285,
+          "median": 10600.5483,
+          "n": 157
+        },
+        "4": {
+          "mean": 13850.6563112,
+          "median": 11033.6617,
+          "n": 25
+        },
+        "5": {
+          "mean": 8786.035247222222,
+          "median": 8589.56505,
+          "n": 18
+        }
+      }
+    },
+    "smoker_ratio": 3.7971237637436497,
+    "age_slope_non_smokers": 267.11831961536456,
+    "obesity_jump": {
+      "smokers": 20194.77282389308,
+      "non_smokers": 878.501828344275
+    },
+    "correlation_with_target": {
+      "pearson": {
+        "age": 0.298,
+        "bmi": 0.198,
+        "children": 0.067,
+        "smoker": 0.787,
+        "sex_male": 0.058,
+        "region_northeast": 0.006,
+        "region_northwest": -0.039,
+        "region_southeast": 0.074,
+        "region_southwest": -0.044
+      },
+      "spearman": {
+        "age": 0.534,
+        "bmi": 0.12,
+        "children": 0.132,
+        "smoker": 0.664,
+        "sex_male": 0.011,
+        "region_northeast": 0.045,
+        "region_northwest": -0.02,
+        "region_southeast": 0.017,
+        "region_southwest": -0.043
+      }
+    },
+    "vif": {
+      "age": 1.017,
+      "bmi": 1.107,
+      "children": 1.004,
+      "smoker": 1.012,
+      "sex_male": 1.009,
+      "region_northeast": 1.526,
+      "region_northwest": 1.524,
+      "region_southeast": 1.597
+    },
+    "risk_groups": {
+      "Non-fumeur": {
+        "mean": 8440.660306508938,
+        "n": 1063
+      },
+      "Fumeur, IMC < 30": {
+        "mean": 21363.217015968992,
+        "n": 129
+      },
+      "Fumeur, IMC ≥ 30": {
+        "mean": 41557.98983986207,
+        "n": 145
+      }
+    }
+  },
+  "figures": [
+    {
+      "name": "eda_target_distribution",
+      "section": "univariate",
+      "title": "Distribution des coûts",
+      "caption": "Les coûts sont fortement asymétriques à droite (skewness 1.51) : la moyenne (13 279 $) dépasse nettement la médiane (9 386 $), et les 10 % d'assurés les plus coûteux concentrent 32% de la charge totale. Après passage au logarithme, la distribution devient quasi symétrique (skewness -0.09) mais reste multimodale, signe de sous-populations distinctes. Cette forme motive une cible log, le GLM Gamma à lien log, et le suivi de la MAE en plus de la RMSE."
+    },
+    {
+      "name": "eda_numeric_features",
+      "section": "univariate",
+      "title": "Variables explicatives numériques",
+      "caption": "L'âge est quasi uniforme entre 18 et 64 ans, avec un pic à 18-19 ans (10.2% des assurés), artefact probable de la simulation. L'IMC suit une loi proche de la normale (moyenne 30.7) ; 53% des assurés sont obèses (IMC ≥ 30). Le nombre d'enfants décroît de 0 à 5. Les variables catégorielles sont équilibrées (hommes 50%, régions de 24 à 27 %), sauf le tabagisme : 20% de fumeurs."
+    },
+    {
+      "name": "eda_costs_by_category",
+      "section": "bivariate",
+      "title": "Coûts par variable catégorielle",
+      "caption": "Le tabagisme domine : un fumeur coûte en moyenne 32 050 $ contre 8 441 $ pour un non-fumeur, soit ×3.8. Les écarts par sexe (hommes 13 975 $, femmes 12 570 $) et par région (maximum : southeast, 14 735 $) sont modestes. La phase 4 teste s'ils sont significatifs et s'ils persistent une fois le tabagisme pris en compte (le sud-est compte plus de fumeurs et d'obèses)."
+    },
+    {
+      "name": "eda_costs_vs_numeric",
+      "section": "bivariate",
+      "title": "Âge, IMC et coûts",
+      "caption": "Les coûts croissent avec l'âge de façon régulière (≈ 267 $ par année chez les non-fumeurs), en trois bandes parallèles : non-fumeurs, fumeurs non obèses et fumeurs obèses. L'IMC n'a presque pas d'effet chez les non-fumeurs (+879 $ au-delà de 30) mais crée une rupture chez les fumeurs (+20 195 $). C'est une **interaction** : l'effet de l'IMC dépend du tabagisme. Un modèle additif ne peut pas la capturer sans un terme dédié (phase 5)."
+    },
+    {
+      "name": "eda_correlations",
+      "section": "bivariate",
+      "title": "Corrélations",
+      "caption": "Corrélation avec les coûts : tabagisme r = 0.79, âge r = 0.30, IMC r = 0.20, les autres variables sont proches de 0. En rangs (Spearman), l'âge devient le premier facteur (ρ = 0.53) : il ordonne régulièrement les coûts, tandis que le tabagisme crée les écarts les plus importants en montant. Les variables explicatives sont peu corrélées entre elles (VIF max 1.60, très en dessous du seuil usuel de 5) : il n'y a pas de multicolinéarité à traiter pour les modèles linéaires."
+    },
+    {
+      "name": "eda_risk_segments",
+      "section": "multivariate",
+      "title": "Segments de risque",
+      "caption": "En combinant trois variables, on obtient une segmentation tarifaire lisible : non-fumeurs (8 441 $ en moyenne, n = 1063), fumeurs non obèses (21 363 $, n = 129) et fumeurs obèses (41 558 $, n = 145). Dans chaque segment, l'âge ajoute un gradient régulier. Ce couple tabagisme × obésité, puis l'âge, structure la suite de la modélisation."
+    },
+    {
+      "name": "eda_heatmap_bmi_age",
+      "section": "multivariate",
+      "title": "Interaction IMC × âge × tabagisme",
+      "caption": "La carte de chaleur confirme l'interaction à trois variables. Chez les non-fumeurs, la couleur varie surtout de gauche à droite (effet de l'âge). Chez les fumeurs, elle bascule nettement au-dessus de 30 d'IMC, et ce quel que soit l'âge. Un modèle à arbres capture cette structure automatiquement ; un modèle linéaire ou un GLM doit la recevoir comme variable construite."
+    }
+  ]
+}
