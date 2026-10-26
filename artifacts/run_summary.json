@@ -1,7 +1,7 @@
 {
   "package_version": "2.0.0",
-  "finished_at": "2026-10-26T07:00:00+00:00",
-  "git_commit": "6c5d1cb6e1f43da922556e6aba960430c45f11d7",
+  "finished_at": "2026-10-26T07:18:09+00:00",
+  "git_commit": "51db37735d36fd2e3f04e60157c3da7b9790b686",
   "data_sha256": "505c1cbc2e63d0363bac59501563df2530aadf4cdb9cfee226f4ef32f5468281",
   "python": "3.12.12",
   "platform": "macOS-26.7.1-x86_64-i386-64bit",
@@ -20,14 +20,14 @@
   "timings_s": {
     "Chargement et vérification des données": 0.01,
     "Audit qualité et nettoyage": 0.06,
-    "Analyse exploratoire": 1.95,
-    "Statistiques inférentielles": 1.76,
-    "Ablation du feature engineering": 1.59,
-    "Entraînement et évaluation des modèles": 44.34,
-    "Interprétation et équité": 49.81,
-    "Suivi MLflow": 4.29,
-    "Génération du rapport": 0.43
+    "Analyse exploratoire": 2.13,
+    "Statistiques inférentielles": 1.84,
+    "Ablation du feature engineering": 1.68,
+    "Entraînement et évaluation des modèles": 45.29,
+    "Interprétation et équité": 50.62,
+    "Suivi MLflow": 4.11,
+    "Génération du rapport": 0.46
   },
-  "mlflow_run_id": "e03e6a4c66124de29ffc920cac46fa4d",
+  "mlflow_run_id": "7ba81db8b090487a812520a408e7c905",
   "report": "reports/generated/report.html"
 }

@@ -40,8 +40,9 @@ insurance-costs summary                            # dernière exécution
 - Dépendances épinglées (`requirements.txt`), y compris les dépendances transitives
   sensibles (numba/llvmlite, pyparsing).
 - Empreinte SHA-256 des données brutes : le pipeline s'arrête si la source change.
-- **Vérifié** : deux entraînements successifs produisent un `metrics.json` strictement
-  identique (hors durées d'exécution).
+- **Vérifié** : deux exécutions successives produisent les mêmes métriques, hyperparamètres
+  et modèle. Seules diffèrent les durées d'exécution et, ponctuellement, le 16e chiffre
+  significatif d'une moyenne (arrondi flottant des calculs parallèles, ~1e-16).
 
 ## Suivi des expériences (MLflow)
 

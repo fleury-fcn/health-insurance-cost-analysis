@@ -11,7 +11,7 @@
   },
   "Ridge log (smearing) - variables brutes": {
     "cv_rmse": 9744.776307688677,
-    "cv_r2": 0.34067818557730717,
+    "cv_r2": 0.34067818557730734,
     "delta_rmse_vs_full": 5137.958484775701
   },
   "Ridge log (smearing) - avec interactions": {
