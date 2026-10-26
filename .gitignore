@@ -2,29 +2,42 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+build/
+dist/
 .venv/
 venv/
-.env
 
-# Data, models and generated outputs
+# Secrets — never commit credentials
+.env
+.env.*
+*.pem
+*.key
+secrets.toml
+.streamlit/secrets.toml
+
+# Data: raw data is downloaded (and checksum-verified) by the pipeline.
+# Only the small cleaned dataset is versioned because the online demo needs it.
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
+data/processed/*
 !data/processed/.gitkeep
 !data/processed/insurance_clean.csv
+*.parquet
+*.zip
+*.h5
+
+# Models: only the light production model is versioned (demo dependency)
 models/*
 !models/best_model.joblib
-artifacts/*
-!artifacts/metrics.json
-!artifacts/statistics.json
-!artifacts/subgroup_errors.json
-!artifacts/eda_distributions.png
+*.pkl
+
+# Generated artifacts: keep summaries and figures, not experiment stores
+artifacts/mlruns/
+mlruns/
+mlflow.db
 reports/generated/*
 !reports/generated/report.html
-*.joblib
-!models/best_model.joblib
-*.pkl
-*.parquet
+!reports/generated/report.pdf
 
 # Notebooks
 .ipynb_checkpoints/

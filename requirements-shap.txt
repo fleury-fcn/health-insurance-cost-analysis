@@ -1,2 +1,0 @@
-# Optional local explanation extra; the pipeline records a status if unavailable.
-shap==0.46.0
