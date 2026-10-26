@@ -1,0 +1,33 @@
+{
+  "package_version": "2.0.0",
+  "finished_at": "2026-10-26T06:49:56+00:00",
+  "git_commit": "7d1c19994fd66fced4bbf9137ddda96ae1351a89",
+  "data_sha256": "505c1cbc2e63d0363bac59501563df2530aadf4cdb9cfee226f4ef32f5468281",
+  "python": "3.12.12",
+  "platform": "macOS-26.7.1-x86_64-i386-64bit",
+  "rows": 1337,
+  "n_iter": 30,
+  "best_model": "Lasso",
+  "best_test_metrics": {
+    "rmse": 3345.2370217220723,
+    "mae": 1991.9530641355507,
+    "r2": 0.9223712671581983,
+    "gamma_deviance": 0.12260230866670388,
+    "calibration_ratio": 1.04954471631135,
+    "gini": 0.9538825249453681,
+    "share_negative_predictions": 0.0
+  },
+  "timings_s": {
+    "Chargement et vérification des données": 0.01,
+    "Audit qualité et nettoyage": 0.06,
+    "Analyse exploratoire": 2.17,
+    "Statistiques inférentielles": 1.8,
+    "Ablation du feature engineering": 1.71,
+    "Entraînement et évaluation des modèles": 43.08,
+    "Interprétation et équité": 52.74,
+    "Suivi MLflow": 3.99,
+    "Génération du rapport": 0.0
+  },
+  "mlflow_run_id": "12c524f46d024ddaa1cc88f1b0a65508",
+  "report": "/Users/mtech/Library/CloudStorage/GoogleDrive-fleuryniyokwizera2030@gmail.com/Mon disque/MAIN FOLDER LILLE/💻PROJECTS/Analysisproject/reports/generated/report.html"
+}

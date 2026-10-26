@@ -351,7 +351,7 @@
       "p_value": 0.0002266324484116673,
       "partial_eta2": 0.01019739707711122,
       "relative_effects": {
-        "male vs female (vs female)": -0.08267857815379517
+        "male (vs female)": -0.08267857815379517
       },
       "note": "OLS sur log(coûts) : effets multiplicatifs, test F approximatif (résidus non parfaitement normaux)."
     },
