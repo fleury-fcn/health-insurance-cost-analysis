@@ -50,7 +50,7 @@
           -4.49150529873156e-06
         ]
       },
-      "fit_seconds": 0.24
+      "fit_seconds": 0.22
     },
     "Ridge": {
       "family": "Linéaire",
@@ -93,7 +93,7 @@
           0.9554072324776534
         ]
       },
-      "fit_seconds": 9.45
+      "fit_seconds": 7.9
     },
     "Lasso": {
       "family": "Linéaire",
@@ -136,7 +136,7 @@
           0.955876137062914
         ]
       },
-      "fit_seconds": 0.48
+      "fit_seconds": 0.53
     },
     "Ridge cible log": {
       "family": "Linéaire",
@@ -179,7 +179,7 @@
           0.8511523973719332
         ]
       },
-      "fit_seconds": 0.47
+      "fit_seconds": 0.52
     },
     "GLM Gamma (lien log)": {
       "family": "GLM actuariel",
@@ -222,7 +222,7 @@
           0.9101699741742758
         ]
       },
-      "fit_seconds": 0.42
+      "fit_seconds": 0.46
     },
     "Random Forest": {
       "family": "Arbres",
@@ -268,7 +268,7 @@
           0.9536434927376594
         ]
       },
-      "fit_seconds": 23.73
+      "fit_seconds": 23.85
     },
     "XGBoost": {
       "family": "Boosting",
@@ -317,7 +317,7 @@
           0.9520121494219407
         ]
       },
-      "fit_seconds": 6.46
+      "fit_seconds": 5.85
     },
     "LightGBM": {
       "family": "Boosting",
@@ -367,7 +367,7 @@
           0.950251811773282
         ]
       },
-      "fit_seconds": 4.23
+      "fit_seconds": 4.09
     }
   },
   "best_vs_runner_up": {

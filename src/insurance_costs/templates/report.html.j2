@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coûts d'assurance maladie : analyse et modélisation</title>
+<meta name="description" content="Rapport généré automatiquement : qualité des données, EDA, inférence, modèles, interprétation SHAP et équité.">
+<script src="{{ plotly_cdn }}" charset="utf-8"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7; --surface: #fcfcfb; --card: #ffffff;
+    --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+    --line: #e1e0d9; --accent: #2a78d6; --accent-soft: #e8f1fc; --warm: #eb6834;
+    --good: #006300; --radius: 10px;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  header.hero { background: var(--card); border-bottom: 1px solid var(--line); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  header.hero .wrap { padding-top: 40px; padding-bottom: 28px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+  h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.2; margin: 6px 0 10px; }
+  h2 { font-size: 24px; margin: 0 0 14px; padding-top: 8px; }
+  h3 { font-size: 18px; margin: 26px 0 8px; }
+  p, li { color: var(--ink); }
+  .lead { color: var(--ink-2); font-size: 18px; max-width: 800px; margin: 0; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 14px; }
+  .meta code { font-size: 12px; }
+  nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(249,249,247,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  nav.toc .wrap { display: flex; gap: 18px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; white-space: nowrap; }
+  nav.toc a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+  nav.toc a:hover { color: var(--accent); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin: 24px 0; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 18px 0 8px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+  .kpi .label { color: var(--ink-2); font-size: 13px; }
+  .kpi .value { font-size: 28px; font-weight: 700; margin: 2px 0; }
+  .kpi .sub { color: var(--muted); font-size: 13px; }
+  .callout { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
+  .callout.warm { background: #fdf0ea; border-left-color: var(--warm); }
+  .figure { margin: 18px 0 8px; border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; background: var(--surface); }
+  .caption { color: var(--ink-2); font-size: 15px; margin: 8px 4px 0; }
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-2); font-weight: 600; background: var(--surface); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.best td { background: #fdf0ea; font-weight: 600; }
+  .muted { color: var(--muted); }
+  .pill { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: #1c5cab; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  ol.reco > li { margin-bottom: 10px; }
+  footer { color: var(--muted); font-size: 13px; padding: 10px 0 40px; }
+  a { color: #1c5cab; }
+  @media (max-width: 600px) { section { padding: 18px 16px; } .wrap { padding: 0 16px; } }
+  @media print {
+    nav.toc { display: none; }
+    body { background: white; font-size: 12px; }
+    section { border: none; padding: 0; margin: 18px 0; break-inside: auto; }
+    .figure, .kpi, table { break-inside: avoid; }
+    h2 { break-before: page; }
+    #resume h2 { break-before: auto; }
+  }
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Projet data science · approche actuarielle</div>
+  <h1>Coûts d'assurance maladie : quels facteurs, quelle prédiction&nbsp;?</h1>
+  <p class="lead">Analyse statistique et modélisation de {{ summary.rows|num }} assurés : qualité des données, exploration, tests d'hypothèses, comparaison de {{ metrics.models|length }} modèles, interprétation SHAP et audit d'équité.</p>
+  <div class="meta">Rapport généré automatiquement le {{ summary.finished_at[:10] }} · commit <code>{{ summary.git_commit[:7] }}</code> · données SHA-256 <code>{{ summary.data_sha256[:12] }}…</code> · Python {{ summary.python }} · seed 42</div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#resume">Résumé</a><a href="#donnees">Données</a><a href="#eda">Exploration</a>
+  <a href="#inference">Inférence</a><a href="#features">Variables</a><a href="#modeles">Modèles</a>
+  <a href="#interpretation">Interprétation</a><a href="#limites">Limites</a><a href="#recommandations">Recommandations</a><a href="#annexe">Reproductibilité</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="resume">
+  <h2>Résumé exécutif</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="label">Variance expliquée (test)</div><div class="value">R² {{ kpi.r2|num(3) }}</div><div class="sub">{{ best }}, sur des assurés jamais vus</div></div>
+    <div class="kpi"><div class="label">Erreur absolue moyenne</div><div class="value">{{ kpi.mae|money }}</div><div class="sub">RMSE {{ kpi.rmse|money }} contre {{ kpi.baseline_rmse|money }} pour la baseline</div></div>
+    <div class="kpi"><div class="label">Fumeur vs non-fumeur</div><div class="value">×{{ kpi.smoker_ratio|num(1) }}</div><div class="sub">sur le coût moyen annuel</div></div>
+    <div class="kpi"><div class="label">Fumeur obèse vs non-fumeur</div><div class="value">+{{ kpi.gap_smoker_obese|money }}</div><div class="sub">par an ({{ kpi.smoker_obese|money }} contre {{ kpi.non_smoker|money }})</div></div>
+  </div>
+  <p><strong>Question.</strong> Quels facteurs expliquent les frais médicaux annuels d'un assuré, et comment les prédire de façon fiable, interprétable et équitable ?</p>
+  <ul>
+    <li><strong>Trois facteurs suffisent à expliquer l'essentiel</strong> : le tabagisme, l'âge et l'IMC (en ordre d'importance SHAP). Le sexe et la région pèsent moins de {{ [interp.shap.mean_abs.sex, interp.shap.mean_abs.region]|max|money }} en moyenne.</li>
+    <li><strong>Le tabagisme et l'obésité interagissent</strong> : au-delà d'un IMC de 30, le coût d'un fumeur bondit (≈ {{ groups["Fumeur, IMC < 30"].mean|money }} → {{ groups["Fumeur, IMC ≥ 30"].mean|money }}), alors que l'IMC ne change presque rien pour un non-fumeur.</li>
+    <li><strong>Un modèle linéaire transparent égale le boosting</strong> quand il reçoit ces interactions : {{ best }} (R² {{ kpi.r2|num(3) }}) est à égalité statistique avec XGBoost et LightGBM, avec des coefficients auditables et un modèle de {{ card.size_kb|num(1) }} Ko.</li>
+    <li><strong>Limite principale</strong> : environ {{ metrics.residuals.share_underpredicted_gt_10k|pct }} des assurés subissent un « choc » de coût que les 6 variables disponibles n'expliquent pas. Il faudrait des données médicales pour aller plus loin.</li>
+    <li><strong>Équité</strong> : le modèle se trompe à peu près autant pour les hommes et les femmes et selon les régions. Une tarification unisexe (obligatoire dans l'UE) ne coûte rien en précision. Point de vigilance : la calibration des plus jeunes.</li>
+  </ul>
+</section>
+
+<section id="donnees">
+  <h2>1. Données et qualité</h2>
+  <p><em>Medical Cost Personal Dataset</em> (B. Lantz, <em>Machine Learning with R</em> ; diffusion Kaggle, licence ODbL) : {{ quality.rows|num }} assurés américains, 6 variables explicatives (âge, sexe, IMC, enfants, tabagisme, région) et la cible <code>charges</code> (frais médicaux annuels, USD). Données <strong>simulées</strong> à partir de statistiques démographiques : les conclusions illustrent une méthode, pas un portefeuille réel. Source téléchargée et vérifiée par empreinte : <a href="{{ data_url }}">{{ data_url }}</a>.</p>
+  <h3>Audit</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Contrôle</th><th>Résultat</th></tr>
+    <tr><td>Doublons exacts</td><td>{{ quality.duplicates }}</td></tr>
+    <tr><td>Valeurs manquantes</td><td>{{ quality.missing_values }}</td></tr>
+    <tr><td>Modalités inattendues / valeurs impossibles</td><td>{{ quality.unexpected_categories.values()|map("length")|sum }} / {{ quality.out_of_range.values()|sum }}</td></tr>
+    <tr><td>IMC atypiques (IQR)</td><td>{{ quality.outliers_iqr.bmi.count }} : plausibles (obésité morbide), conservés</td></tr>
+    <tr><td>Coûts au-delà de Q3 + 1,5·IQR ({{ quality.outliers_iqr.charges.upper_fence|money }})</td><td>{{ quality.outliers_iqr.charges.count }}, dont {{ quality.charge_outlier_profile.share_smokers|pct }} de fumeurs (contre {{ quality.charge_outlier_profile.share_smokers_overall|pct }} au global)</td></tr>
+  </table></div>
+  <h3>Nettoyage journalisé</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Action</th><th class="num">Lignes retirées</th><th>Justification</th></tr>
+    {% for step in quality.cleaning_log %}<tr><td>{{ step.action }}</td><td class="num">{{ step.rows_removed }}</td><td>{{ step.reason }}</td></tr>{% endfor %}
+  </table></div>
+  <p class="callout">Les coûts extrêmes sont <strong>conservés</strong> : ils ne sont pas des erreurs mais le risque que l'assureur couvre. Les retirer ferait baisser artificiellement la prime pure.</p>
+</section>
+
+<section id="eda">
+  <h2>2. Analyse exploratoire</h2>
+  {% for section, title in [("univariate", "Univariée"), ("bivariate", "Bivariée"), ("multivariate", "Multivariée")] %}
+  <h3>{{ title }}</h3>
+  {% for f in eda.figures if f.section == section %}
+  <div class="figure">{{ fig[f.name] }}<p class="caption">{{ f.caption|md }}</p></div>
+  {% endfor %}
+  {% endfor %}
+</section>
+
+<section id="inference">
+  <h2>3. Statistiques inférentielles</h2>
+  <p>Démarche : <strong>vérifier les hypothèses avant de tester</strong> (Shapiro-Wilk pour la normalité, Levene pour l'égalité des variances), retenir le test dont les hypothèses tiennent, et rapporter <strong>tailles d'effet et intervalles de confiance</strong>, pas seulement des p-values. Correction de Holm pour les tests multiples ; tests F partiels sur log(coûts) pour contrôler la confusion.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Question</th><th>Test retenu</th><th class="num">p</th><th>Taille d'effet</th></tr>
+    <tr><td>Fumeurs vs non-fumeurs</td><td>Mann-Whitney (+ Welch, bootstrap)</td><td class="num">{{ inf.smoker.mann_whitney.p_value|p }}</td><td>g = {{ inf.smoker.hedges_g|num(2) }}, r<sub>rb</sub> = {{ inf.smoker.mann_whitney.rank_biserial|num(2) }} ({{ inf.smoker.hedges_g_magnitude }})</td></tr>
+    <tr><td>Hommes vs femmes (brut)</td><td>Mann-Whitney</td><td class="num">{{ inf.sex.mann_whitney.p_value|p }}</td><td>g = {{ inf.sex.hedges_g|num(2) }} ({{ inf.sex.hedges_g_magnitude }})</td></tr>
+    <tr><td>Hommes vs femmes (à profil égal)</td><td>F partiel, OLS log</td><td class="num">{{ inf.adjusted_f_tests.sex.p_value|p }}</td><td>η²p = {{ inf.adjusted_f_tests.sex.partial_eta2|num(3) }}</td></tr>
+    <tr><td>Régions (brut)</td><td>Kruskal-Wallis / Alexander-Govern</td><td class="num">{{ inf.region.kruskal_wallis.p_value|p }} / {{ inf.region.alexander_govern.p_value|p }}</td><td>η² = {{ inf.region.anova.eta2|num(3) }} ({{ inf.region.eta2_magnitude }})</td></tr>
+    <tr><td>Régions (à profil égal)</td><td>F partiel, OLS log</td><td class="num">{{ inf.adjusted_f_tests.region.p_value|p }}</td><td>η²p = {{ inf.adjusted_f_tests.region.partial_eta2|num(3) }}</td></tr>
+    <tr><td>Nombre d'enfants</td><td>Kruskal-Wallis</td><td class="num">{{ inf.children.kruskal_wallis.p_value|p }}</td><td>ε² = {{ inf.children.kruskal_wallis.epsilon2|num(3) }}</td></tr>
+    <tr><td>Tabagisme × région</td><td>χ² d'indépendance</td><td class="num">{{ inf.chi2_region_smoker.p_value|p }}</td><td>V = {{ inf.chi2_region_smoker.cramers_v|num(2) }}</td></tr>
+    <tr><td>Tabagisme × sexe</td><td>χ² d'indépendance</td><td class="num">{{ inf.chi2_sex_smoker.p_value|p }}</td><td>V = {{ inf.chi2_sex_smoker.cramers_v|num(2) }}</td></tr>
+  </table></div>
+  <div class="figure">{{ fig.inference_group_ci }}</div>
+  <h3>Conclusions</h3>
+  <ul>{% for c in inf.conclusions %}<li>{{ c|md }}</li>{% endfor %}</ul>
+</section>
+
+<section id="features">
+  <h2>4. Feature engineering</h2>
+  <p>Tout est encapsulé dans un pipeline scikit-learn (aucune fuite entre plis, transformations identiques en production) : indicateur d'obésité (IMC ≥ 30, seuil OMS), interactions <code>fumeur × obèse</code>, <code>IMC × fumeur</code>, <code>âge × fumeur</code>, âge² centré. Encodage one-hot et standardisation pour les modèles linéaires, encodage ordinal sans mise à l'échelle pour les arbres. Cible log disponible avec correction de Duan (sans elle, exp(ŷ) estime une médiane, pas une moyenne).</p>
+  <div class="table-wrap"><table>
+    <tr><th>Configuration (Ridge, CV 5 plis sur le train)</th><th class="num">RMSE CV</th><th class="num">R² CV</th></tr>
+    {% for name, r in ablation.items() %}<tr><td>{{ name }}</td><td class="num">{{ r.cv_rmse|num }}</td><td class="num">{{ r.cv_r2|num(3) }}</td></tr>{% endfor %}
+  </table></div>
+  <p class="callout">Les interactions font passer la RMSE de {{ ablation["Ridge - variables brutes"].cv_rmse|num }} à {{ ablation["Ridge - avec interactions"].cv_rmse|num }} $. La cible log échoue ici : les coûts suivent des <strong>bandes parallèles</strong> (même pente d'âge en dollars pour tous), une structure additive qu'une échelle multiplicative déforme. L'interaction âge × fumeur corrige en partie ce biais.</p>
+</section>
+
+<section id="modeles">
+  <h2>5. Modélisation</h2>
+  <p><strong>Protocole</strong> : split 80/20 stratifié sur le tabagisme ({{ metrics.split.n_train }} / {{ metrics.split.n_test }} assurés) ; hyperparamètres réglés en validation croisée 5 plis sur le train (grilles pour les modèles linéaires, recherche aléatoire pour les arbres) ; <strong>sélection sur la RMSE de CV</strong>, jamais sur le test ; évaluation finale unique sur le test avec IC 95 % bootstrap.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Modèle</th><th>Famille</th><th class="num">RMSE CV</th><th class="num">RMSE test [IC 95 %]</th><th class="num">MAE test</th><th class="num">R² test</th><th class="num">Gini</th><th class="num">Calibration</th></tr>
+    {% for name in ranking %}{% set m = metrics.models[name] %}
+    <tr class="{{ 'best' if name == best }}"><td>{{ name }}{% if name == best %} ✓{% endif %}</td><td>{{ m.family }}</td><td class="num">{{ m.cv_rmse|num }} ± {{ m.cv_rmse_std|num }}</td><td class="num">{{ m.test.rmse|num }} [{{ m.test_ci95.rmse[0]|num }} ; {{ m.test_ci95.rmse[1]|num }}]</td><td class="num">{{ m.test.mae|num }}</td><td class="num">{{ m.test.r2|num(3) }}</td><td class="num">{{ m.test.gini|num(3) }}</td><td class="num">{{ m.test.calibration_ratio|num(3) }}</td></tr>
+    {% endfor %}
+  </table></div>
+  <p class="muted">Gini normalisé : capacité à classer les risques (1 = ordre parfait). Calibration : Σ prédit / Σ observé (1 = portefeuille à l'équilibre).</p>
+  {% if metrics.best_vs_runner_up %}{% set c = metrics.best_vs_runner_up %}
+  <p class="callout"><strong>{{ c.best }} vs {{ c.runner_up }}</strong> : écart de RMSE {{ c.mean_diff|num }} $, IC 95 % bootstrap apparié [{{ c.ci95[0]|num }} ; {{ c.ci95[1]|num }}]. Les meilleurs modèles sont <strong>statistiquement à égalité</strong> : leurs écarts de CV (≈ 100 $) sont bien inférieurs à la variabilité entre plis (≈ {{ bm.cv_rmse_std|num }} $). On retient donc le plus simple et le plus auditable.</p>
+  {% endif %}
+  <div class="figure">{{ fig.model_comparison }}</div>
+  <div class="figure">{{ fig.model_cv_folds }}</div>
+  <h3>Analyse des résidus ({{ best }})</h3>
+  <div class="figure">{{ fig.residuals }}</div>
+  <ul>
+    <li><strong>Deux régimes</strong> : la plupart des assurés ont un résidu légèrement négatif (médiane {{ metrics.residuals.median_residual|money }}), et {{ metrics.residuals.share_underpredicted_gt_10k|pct }} ont un coût observé supérieur de plus de 10 000 $ à la prédiction. C'est le schéma « coût de base + choc occasionnel » : prédire l'<em>espérance</em> revient à faire payer à chacun une part du risque de choc, c'est la mutualisation.</li>
+    <li>{{ (1 - metrics.residuals.large_errors_smoker_share)|pct(0) }} des grosses erreurs concernent des <strong>non-fumeurs</strong> : aucun des 6 facteurs n'explique leurs chocs. C'est le signal d'une variable manquante (antécédents médicaux).</li>
+    <li>Asymétrie des résidus : {{ metrics.residuals.skewness|num(2) }} ; résidu moyen : {{ metrics.residuals.mean_residual|money }}.</li>
+  </ul>
+  <div class="figure">{{ fig.calibration_lorenz }}{% set cal = metrics.residuals.calibration_by_decile %}<p class="caption">À gauche, observé et prédit se suivent du décile 5 au décile 10, où se concentre l'essentiel de la charge. Sur le décile le moins cher, le modèle prédit {{ cal.pred[0]|money }} pour {{ cal.obs[0]|money }} observés : les profils à bas risque (surtout jeunes non-fumeurs) sont surestimés, ce qui rejoint l'alerte d'équité. À droite, la courbe de concentration du modèle est quasi confondue avec celle de l'oracle : il ordonne presque parfaitement les risques (Gini {{ kpi.gini|num(3) }}).</p></div>
+  {% if relativities %}
+  <h3>Lecture actuarielle : relativités du GLM Gamma</h3>
+  <p>Coefficients exp(β) pour un écart-type de la variable (numériques) ou par rapport à la modalité de référence. Un facteur de 1,10 signifie +10 % sur le coût attendu, toutes choses égales par ailleurs. Coût de base : {{ metrics.glm_coefficients.intercept_base_cost|money }}.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Variable</th><th class="num">Relativité</th></tr>
+    {% for name, value in relativities[:8] %}<tr><td><code>{{ name }}</code></td><td class="num">×{{ value|num(3) }}</td></tr>{% endfor %}
+  </table></div>
+  {% endif %}
+</section>
+
+<section id="interpretation">
+  <h2>6. Interprétation et équité</h2>
+  <ul>{% for i in interp.insights %}<li>{{ i|md }}</li>{% endfor %}</ul>
+  <div class="figure">{{ fig.importance }}</div>
+  <div class="figure">{{ fig.shap_beeswarm }}<p class="caption">Chaque point est un assuré du test. Sa position donne la contribution de la variable à sa prédiction (en $ par rapport au coût moyen prédit), sa couleur la valeur de la variable (orange = élevée / « oui »). Le tabagisme sépare deux nuages, l'âge s'étale de façon continue.</p></div>
+  <div class="figure">{{ fig.partial_dependence }}<p class="caption">Effet moyen d'une variable lorsque les autres restent à leurs valeurs observées, séparément pour fumeurs et non-fumeurs. Le saut d'IMC à 30 n'existe que chez les fumeurs.</p></div>
+  <h3>Erreurs par sous-groupe</h3>
+  <div class="figure">{{ fig.fairness }}</div>
+  <div class="table-wrap"><table>
+    <tr><th>Groupe</th><th class="num">n</th><th class="num">MAE</th><th class="num">Biais moyen</th><th class="num">Calibration [IC 95 %]</th></tr>
+    {% for col, label in [("age_band", "Âge"), ("sex", "Sexe"), ("region", "Région"), ("smoker", "Fumeur")] %}
+    {% for g, v in interp.fairness[col].groups.items() %}
+    <tr><td>{{ label }} : {{ g }}</td><td class="num">{{ v.n }}</td><td class="num">{{ v.mae|num }}</td><td class="num">{{ v.bias|num }}</td><td class="num">{{ v.calibration_ratio|num(2) }} [{{ v.calibration_ci95[0]|num(2) }} ; {{ v.calibration_ci95[1]|num(2) }}]</td></tr>
+    {% endfor %}{% endfor %}
+  </table></div>
+  <p class="callout"><strong>Tarification unisexe</strong> : en neutralisant le sexe, la RMSE passe à {{ interp.unisex.test.rmse|money }} ({{ interp.unisex.delta_rmse|num }} $). Respecter la jurisprudence européenne <em>Test-Achats</em> (2011) ne dégrade pas le modèle.</p>
+</section>
+
+<section id="limites">
+  <h2>7. Limites</h2>
+  <ul>
+    <li><strong>Données simulées et limitées</strong> : {{ summary.rows|num }} assurés, 6 variables, aucune dimension temporelle (inflation médicale, dérive), ni exposition, ni franchise. Les montants ne doivent pas être transposés à un portefeuille réel.</li>
+    <li><strong>Associations, pas causalité</strong> : le modèle ne dit pas combien un individu économiserait en arrêtant de fumer. Une étude causale (données longitudinales, appariement) serait nécessaire.</li>
+    <li><strong>Coût total agrégé</strong> : un actuaire séparerait fréquence et sévérité (modèle Poisson × Gamma, ou Tweedie) avec des données de sinistres individuels.</li>
+    <li><strong>Test de taille modeste</strong> ({{ metrics.split.n_test }} assurés) : les IC bootstrap le rappellent. Les conclusions d'équité sont des alertes à confirmer.</li>
+    <li><strong>Variables sensibles</strong> : le sexe est interdit en tarification dans l'UE, la région peut servir de proxy socio-économique, et l'IMC et le tabagisme sont des données de santé (RGPD, art. 9).</li>
+  </ul>
+</section>
+
+<section id="recommandations">
+  <h2>8. Recommandations métier</h2>
+  <ol class="reco">
+    <li><strong>Segmenter d'abord sur tabagisme × obésité, puis l'âge.</strong> Trois segments ({{ groups["Non-fumeur"].mean|money }} / {{ groups["Fumeur, IMC < 30"].mean|money }} / {{ groups["Fumeur, IMC ≥ 30"].mean|money }}) captent l'essentiel de l'hétérogénéité ; l'âge se tarife ensuite de façon quasi linéaire.</li>
+    <li><strong>Prévention ciblée</strong> : les fumeurs obèses représentent {{ (groups["Fumeur, IMC ≥ 30"].n / summary.rows)|pct }} des assurés mais coûtent en moyenne {{ kpi.gap_smoker_obese|money }} de plus par an qu'un non-fumeur. C'est la cible prioritaire des programmes de sevrage et de nutrition, sous réserve d'une évaluation causale de leur efficacité.</li>
+    <li><strong>Déployer un modèle transparent</strong> ({{ best }}), avec un challenger boosting suivi en parallèle. À performance égale, l'auditabilité prime (contrôle, explicabilité au client, régulateur).</li>
+    <li><strong>Collecter de quoi expliquer les chocs</strong> : antécédents et pathologies chroniques, historique de sinistres. C'est le levier principal de gain de précision, devant le choix d'algorithme.</li>
+    <li><strong>Gouvernance et équité</strong> : tarifer sans le sexe (coût nul), surveiller la calibration par tranche d'âge (jeunes surestimés), recalibrer le niveau global sur le portefeuille courant et suivre ces indicateurs à chaque mise à jour.</li>
+  </ol>
+</section>
+
+<section id="annexe">
+  <h2>Annexe : reproductibilité</h2>
+  <p>Ce rapport est régénéré de bout en bout par <code>make run</code> (CLI <code>insurance-costs run</code>) : téléchargement vérifié, audit, EDA, inférence, ablation, entraînement, interprétation, suivi MLflow puis rendu Jinja2. Seed 42 partout, dépendances épinglées, métriques identiques d'une exécution à l'autre.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Étape</th><th class="num">Durée (s)</th></tr>
+    {% for k, v in summary.timings_s.items() %}<tr><td>{{ k }}</td><td class="num">{{ v|num(1) }}</td></tr>{% endfor %}
+  </table></div>
+  <p class="muted">Modèle publié : {{ card.model }} · hyperparamètres {{ card.params }} · {{ card.size_kb|num(1) }} Ko · scikit-learn {{ card.versions["scikit-learn"] }} · {{ card.intended_use }}</p>
+</section>
+
+</main>
+<footer><div class="wrap">Fleury Niyokwizera · Code sous licence MIT · Données ODbL (Kaggle, <em>Medical Cost Personal Dataset</em>) · <a href="https://github.com/fleury-fcn/health-insurance-cost-analysis">Dépôt GitHub</a></div></footer>
+</body>
+</html>

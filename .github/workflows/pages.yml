@@ -1,21 +1,39 @@
 name: Publish report
+
+# Publishes the committed report (reports/generated/report.html) to GitHub Pages.
+# The report is produced locally by `make run`; CI separately checks the pipeline
+# still runs end to end (see ci.yml), so the published numbers match the README.
 on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths: ["reports/generated/**", ".github/workflows/pages.yml"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
-  report:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: {python-version: "3.11"}
-      - run: pip install -r requirements.txt && pip install -e .
-      - run: python -m insurance_costs.pipeline
+      - name: Assemble site
+        run: |
+          mkdir -p site
+          cp reports/generated/report.html site/index.html
+          if [ -f reports/generated/report.pdf ]; then cp reports/generated/report.pdf site/; fi
+          touch site/.nojekyll
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
-        with: {path: reports/generated}
-      - uses: actions/deploy-pages@v4
+        with: {path: site}
+      - id: deployment
+        uses: actions/deploy-pages@v4

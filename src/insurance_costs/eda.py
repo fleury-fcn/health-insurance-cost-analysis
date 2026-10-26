@@ -73,9 +73,11 @@ def _univariate(df: pd.DataFrame, figures: list, findings: dict) -> None:
     fig.add_histogram(x=np.log(y), nbinsx=50, marker_color=BLUE, name="log(coûts)",
                       hovertemplate="log = %{x:.2f}<br>%{y} assurés<extra></extra>",
                       row=1, col=2)
-    for x, label in [(y.mean(), "moyenne"), (y.median(), "médiane")]:
+    for x, label, pos in [(y.mean(), "moyenne", "top right"),
+                          (y.median(), "médiane", "top left")]:
         fig.add_vline(x=x, line_dash="dot", line_color=INK_2, row=1, col=1,
-                      annotation_text=label, annotation_font_color=INK_2)
+                      annotation_text=label, annotation_position=pos,
+                      annotation_font_color=INK_2)
     fig.update_layout(title="Distribution des coûts annuels", showlegend=False, height=380)
     fig.update_yaxes(title_text="Nombre d'assurés", row=1, col=1)
     save_plotly(fig, "eda_target_distribution")

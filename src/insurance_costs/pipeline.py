@@ -64,7 +64,9 @@ def run(n_iter: int = 30, mlflow: bool = True,
         from .tracking import log_experiment
         summary["mlflow_run_id"] = step("Suivi MLflow", log_experiment, modeling, summary)
     dump(summary, ARTIFACT_DIR / "run_summary.json")
-    summary["report"] = str(step("Génération du rapport", build_report))
+    report = step("Génération du rapport", build_report)
+    # Relative path only: absolute paths would leak the local user directory
+    summary["report"] = report.relative_to(ROOT).as_posix()
     dump(summary, ARTIFACT_DIR / "run_summary.json")
     return summary
 

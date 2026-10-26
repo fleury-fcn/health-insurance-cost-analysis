@@ -34,15 +34,16 @@ pio.templates["insurance"] = go.layout.Template(layout=dict(
     font=dict(family=FONT, color=INK, size=13),
     paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
     colorway=SERIES,
-    title=dict(font=dict(size=15, color=INK), x=0, xanchor="left"),
+    title=dict(font=dict(size=15, color=INK), x=0, xanchor="left", y=0.98, yanchor="top"),
     xaxis=dict(gridcolor=GRID, linecolor=AXIS, zeroline=False, tickfont=dict(color=INK_2),
-               title=dict(font=dict(color=INK_2))),
+               title=dict(font=dict(color=INK_2)), automargin=True),
     yaxis=dict(gridcolor=GRID, linecolor=AXIS, zeroline=False, tickfont=dict(color=INK_2),
-               title=dict(font=dict(color=INK_2))),
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0,
+               title=dict(font=dict(color=INK_2)), automargin=True),
+    # Legend top-right, above subplot titles, so it never collides with them
+    legend=dict(orientation="h", yanchor="bottom", y=1.1, xanchor="right", x=1,
                 font=dict(color=INK_2)),
     hoverlabel=dict(bgcolor="white", font=dict(family=FONT, color=INK), bordercolor=GRID),
-    margin=dict(l=60, r=20, t=60, b=50),
+    margin=dict(l=60, r=20, t=95, b=50),
     bargap=0.25,
 ))
 pio.templates.default = "insurance"

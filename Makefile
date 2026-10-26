@@ -13,8 +13,8 @@ run:                ## Pipeline complet : données -> modèles -> rapport
 run-fast:           ## Pipeline rapide (recherche d'hyperparamètres réduite, sans MLflow)
 	$(PY) -m insurance_costs.cli run --n-iter 3 --no-mlflow
 
-report:             ## Régénère le rapport à partir des artefacts
-	$(PY) -m insurance_costs.cli report
+report:             ## Régénère le rapport HTML + PDF à partir des artefacts
+	$(PY) -m insurance_costs.cli report --pdf
 
 test:
 	$(PY) -m pytest

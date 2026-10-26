@@ -56,10 +56,15 @@ def train(n_iter: int = typer.Option(30, help="Tirages de recherche aléatoire."
 
 
 @app.command()
-def report() -> None:
-    """Régénère le rapport HTML à partir des artefacts existants."""
-    from .report import build_report
-    typer.echo(f"Rapport : {build_report()}")
+def report(pdf: bool = typer.Option(False, help="Exporter aussi en PDF (Chrome headless).")
+           ) -> None:
+    """Régénère le rapport HTML (et PDF) à partir des artefacts existants."""
+    from .report import build_report, export_pdf
+    html = build_report()
+    typer.echo(f"Rapport : {html}")
+    if pdf:
+        out = export_pdf(html)
+        typer.echo(f"PDF : {out}" if out else "Chrome/Chromium introuvable : PDF non généré.")
 
 
 @app.command()
