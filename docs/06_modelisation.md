@@ -71,7 +71,7 @@ extrêmes. C'est la variance d'échantillonnage, que les IC bootstrap rendent vi
 
 ![Diagnostic](../artifacts/figures/model_overview.png)
 
-- **Structure en deux régimes** : 96 % des assurés sont dans une bande serrée de résidus
+- **Structure en deux régimes** : 94 % des assurés sont dans une bande serrée de résidus
   autour de −1 400 $ (médiane), et 3,4 % ont un résidu supérieur à +10 000 $. Les coûts
   ressemblent à « coût de base + choc occasionnel » (hospitalisation, pathologie non
   observée).
