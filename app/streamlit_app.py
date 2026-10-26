@@ -42,5 +42,10 @@ with tab2:
         profile["age_smoker"] = profile["age"] * (profile["smoker"] == "yes").astype(int)
         prediction = float(model.predict(profile)[0])
         st.success(f"Coût prédit : **{prediction:,.0f}**")
-        st.info("L'explication SHAP complète est disponible dans les artefacts du pipeline ; "
-                "la prédiction ne constitue pas un avis médical ou contractuel.")
+        shap_plot = ROOT / "artifacts" / "shap_summary.png"
+        if shap_plot.exists():
+            st.image(str(shap_plot), caption="Importance globale SHAP")
+        else:
+            st.info("Installez l'extra `requirements-shap.txt` puis relancez le pipeline "
+                    "pour générer l'explication SHAP. La prédiction ne constitue pas un "
+                    "avis médical ou contractuel.")
