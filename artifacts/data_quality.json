@@ -1,0 +1,182 @@
+{
+  "rows": 1338,
+  "columns": 7,
+  "missing_columns": [],
+  "unexpected_columns": [],
+  "dtypes": {
+    "age": "int64",
+    "sex": "object",
+    "bmi": "float64",
+    "children": "int64",
+    "smoker": "object",
+    "region": "object",
+    "charges": "float64"
+  },
+  "duplicates": 1,
+  "duplicate_rows": [
+    {
+      "age": 19,
+      "sex": "male",
+      "bmi": 30.59,
+      "children": 0,
+      "smoker": "no",
+      "region": "northwest",
+      "charges": 1639.5631
+    },
+    {
+      "age": 19,
+      "sex": "male",
+      "bmi": 30.59,
+      "children": 0,
+      "smoker": "no",
+      "region": "northwest",
+      "charges": 1639.5631
+    }
+  ],
+  "missing_by_column": {
+    "age": 0,
+    "sex": 0,
+    "bmi": 0,
+    "children": 0,
+    "smoker": 0,
+    "region": 0,
+    "charges": 0
+  },
+  "missing_values": 0,
+  "unexpected_categories": {
+    "sex": [],
+    "smoker": [],
+    "region": []
+  },
+  "out_of_range": {
+    "age": 0,
+    "bmi": 0,
+    "children": 0,
+    "charges": 0
+  },
+  "non_numeric": {
+    "age": 0,
+    "bmi": 0,
+    "children": 0,
+    "charges": 0
+  },
+  "describe": {
+    "age": {
+      "count": 1338.0,
+      "mean": 39.207,
+      "std": 14.05,
+      "min": 18.0,
+      "25%": 27.0,
+      "50%": 39.0,
+      "75%": 51.0,
+      "max": 64.0
+    },
+    "bmi": {
+      "count": 1338.0,
+      "mean": 30.663,
+      "std": 6.098,
+      "min": 15.96,
+      "25%": 26.296,
+      "50%": 30.4,
+      "75%": 34.694,
+      "max": 53.13
+    },
+    "children": {
+      "count": 1338.0,
+      "mean": 1.095,
+      "std": 1.205,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 1.0,
+      "75%": 2.0,
+      "max": 5.0
+    },
+    "charges": {
+      "count": 1338.0,
+      "mean": 13270.422,
+      "std": 12110.011,
+      "min": 1121.874,
+      "25%": 4740.287,
+      "50%": 9382.033,
+      "75%": 16639.913,
+      "max": 63770.428
+    }
+  },
+  "outliers_iqr": {
+    "age": {
+      "lower_fence": -9.0,
+      "upper_fence": 87.0,
+      "count": 0,
+      "share": 0.0
+    },
+    "bmi": {
+      "lower_fence": 13.7,
+      "upper_fence": 47.290000000000006,
+      "count": 9,
+      "share": 0.006726457399103139
+    },
+    "children": {
+      "lower_fence": -3.0,
+      "upper_fence": 5.0,
+      "count": 0,
+      "share": 0.0
+    },
+    "charges": {
+      "lower_fence": -13109.1508975,
+      "upper_fence": 34489.350562499996,
+      "count": 139,
+      "share": 0.1038863976083707
+    }
+  },
+  "outliers_robust_z": {
+    "age": 0,
+    "bmi": 2,
+    "children": 0,
+    "charges": 130
+  },
+  "cleaning_log": [
+    {
+      "action": "Normalisation des types et des libellés",
+      "reason": "Libellés en minuscules sans espaces ; conversion numérique stricte.",
+      "rows_removed": 0,
+      "rows_after": 1338
+    },
+    {
+      "action": "Suppression des doublons exacts",
+      "reason": "Sans identifiant, deux lignes identiques au centime près sur les 7 variables sont presque certainement une double saisie : la garder sur-pondérerait ce profil.",
+      "rows_removed": 1,
+      "rows_after": 1337
+    },
+    {
+      "action": "Suppression des lignes incomplètes",
+      "reason": "Aucune imputation : la part de manquants est nulle ou négligeable, et imputer la cible ou ses déterminants principaux introduirait un biais.",
+      "rows_removed": 0,
+      "rows_after": 1337
+    },
+    {
+      "action": "Exclusion des valeurs impossibles",
+      "reason": "Hors bornes de plausibilité ou modalité inconnue : erreurs de saisie.",
+      "rows_removed": 0,
+      "rows_after": 1337
+    },
+    {
+      "action": "Conservation des valeurs extrêmes de coûts",
+      "rows_removed": 0,
+      "rows_after": 1337,
+      "reason": "Les coûts élevés sont le risque que l'assureur couvre. Les retirer sous-estimerait la prime pure. Ils sont traités par la modélisation (cible log, GLM Gamma, métriques robustes)."
+    }
+  ],
+  "rows_after_cleaning": 1337,
+  "charge_outlier_profile": {
+    "count": 139,
+    "share_smokers": 0.9784172661870504,
+    "share_smokers_overall": 0.2049364248317128,
+    "share_obese": 0.9640287769784173
+  },
+  "post_cleaning_checks": {
+    "duplicates": 0,
+    "missing_values": 0,
+    "min_charges": 1121.8739,
+    "share_obese": 0.5280478683620045
+  }
+}

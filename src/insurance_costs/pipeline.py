@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from .analysis import run_analysis
-from .data import audit, clean_data, load_raw
+from .data import load_raw, run_quality
 from .interpretation import interpret
 from .modeling import train_and_evaluate
 from .report import generate_report
@@ -12,8 +12,7 @@ from .report import generate_report
 
 def main() -> None:
     raw = load_raw()
-    quality = audit(raw)
-    clean = clean_data(raw)
+    clean, quality = run_quality(raw)
     statistics = run_analysis(clean)
     metrics, _, best_model, _ = train_and_evaluate(clean)
     interpret(best_model, clean)
