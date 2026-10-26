@@ -22,7 +22,7 @@ def test_interactions_are_built_from_domain_rules():
 
 def test_preprocessor_output_is_numeric_and_named():
     prep = preprocessor().fit(_profiles())
-    Xt = prep.transform(_profiles())
+    Xt = prep.transform(_profiles()).to_numpy()
     assert Xt.shape == (2, len(prep.get_feature_names_out()))
     assert np.isfinite(Xt).all()
 
@@ -30,7 +30,7 @@ def test_preprocessor_output_is_numeric_and_named():
 def test_tree_preprocessor_handles_unseen_region():
     prep = preprocessor(kind="tree").fit(_profiles())
     unseen = _profiles().assign(region=["mars", "mars"])
-    assert (prep.transform(unseen)[:, -1] == -1).all()
+    assert (prep.transform(unseen)["region"] == -1).all()
 
 
 def test_smearing_restores_mean_of_lognormal_target():

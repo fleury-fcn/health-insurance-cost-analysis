@@ -89,7 +89,8 @@ def preprocessor(interactions: bool = True, kind: str = "linear") -> Pipeline:
             ("cat", OrdinalEncoder(categories=categories, handle_unknown="use_encoded_value",
                                    unknown_value=-1), ["sex", "smoker", "region"]),
         ], verbose_feature_names_out=False)
-    return Pipeline([("features", InsuranceFeatures(interactions)), ("encode", encoder)])
+    return Pipeline([("features", InsuranceFeatures(interactions)),
+                     ("encode", encoder)]).set_output(transform="pandas")
 
 
 class SmearedLogRegressor(RegressorMixin, BaseEstimator):

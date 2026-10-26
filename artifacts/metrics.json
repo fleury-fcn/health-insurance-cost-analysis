@@ -1,45 +1,545 @@
 {
-  "best_model": "Gradient Boosting",
+  "best_model": "Lasso",
+  "selection_metric": "cv_rmse",
+  "ranking": [
+    "Lasso",
+    "Ridge",
+    "XGBoost",
+    "Random Forest",
+    "LightGBM",
+    "GLM Gamma (lien log)",
+    "Ridge cible log"
+  ],
   "models": {
+    "Baseline (moyenne)": {
+      "family": "Référence",
+      "rationale": "Plancher de performance : prédire le coût moyen à tous.",
+      "cv_rmse": 12098.177607172154,
+      "cv_rmse_std": 1238.041974962088,
+      "cv_mae": 9155.457082699393,
+      "cv_r2": -0.01537251039395473,
+      "cv_fold_rmse": [
+        10455.521726565747,
+        11479.91809134137,
+        11473.368389954903,
+        13420.444190632319,
+        13661.635637366428
+      ],
+      "best_params": {},
+      "n_configs": 1,
+      "test": {
+        "rmse": 12012.591610232901,
+        "mae": 9080.773325159313,
+        "r2": -0.0010185684988295307,
+        "gamma_deviance": 0.7938657004416708,
+        "calibration_ratio": 1.0295378529027672,
+        "gini": 0.0,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          10780.737815403012,
+          13193.601244535923
+        ],
+        "mae": [
+          8186.777055937954,
+          9995.94615053284
+        ],
+        "r2": [
+          -0.025350678476457167,
+          -4.49150529873156e-06
+        ]
+      },
+      "fit_seconds": 0.25
+    },
     "Ridge": {
-      "cv_rmse": 5084.628111545031,
-      "cv_mae": 3142.3110143310714,
-      "cv_r2": 0.8086188382625444,
-      "test_rmse": 4649.7630712826785,
-      "test_mae": 2929.8774678420887,
-      "test_r2": 0.8823424046880517
+      "family": "Linéaire",
+      "rationale": "Linéaire pénalisé L2, stable, coefficients lisibles.",
+      "cv_rmse": 4605.89927265322,
+      "cv_rmse_std": 680.810290700464,
+      "cv_mae": 2557.4210240183115,
+      "cv_r2": 0.849281292383027,
+      "cv_fold_rmse": [
+        4304.4456757281,
+        5122.856795157264,
+        3414.5090977635186,
+        5272.457029722918,
+        4915.227764894299
+      ],
+      "best_params": {
+        "alpha": 3.1622776601683795
+      },
+      "n_configs": 13,
+      "test": {
+        "rmse": 3368.157552096686,
+        "mae": 2003.42002200964,
+        "r2": 0.9213038466459849,
+        "gamma_deviance": 0.12032760369912267,
+        "calibration_ratio": 1.0495925635356718,
+        "gini": 0.9521364557067413,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          2564.620641982205,
+          4158.829314416174
+        ],
+        "mae": [
+          1712.1094916820882,
+          2347.401843912195
+        ],
+        "r2": [
+          0.8763306420728835,
+          0.9554072324776534
+        ]
+      },
+      "fit_seconds": 8.73
     },
     "Lasso": {
-      "cv_rmse": 5203.248349730653,
-      "cv_mae": 3233.90139262783,
-      "cv_r2": 0.7996026127968567,
-      "test_rmse": 4839.400602834358,
-      "test_mae": 3041.8145054242323,
-      "test_r2": 0.8725495220148196
+      "family": "Linéaire",
+      "rationale": "Pénalité L1 : sélection automatique de variables.",
+      "cv_rmse": 4597.095219958297,
+      "cv_rmse_std": 683.6270482831331,
+      "cv_mae": 2562.3223549653103,
+      "cv_r2": 0.8499438463298045,
+      "cv_fold_rmse": [
+        4291.486542233211,
+        5097.327606153964,
+        3401.8144386455924,
+        5275.955499679629,
+        4918.892013079089
+      ],
+      "best_params": {
+        "alpha": 46.41588833612777
+      },
+      "n_configs": 13,
+      "test": {
+        "rmse": 3345.2370217220723,
+        "mae": 1991.9530641355507,
+        "r2": 0.9223712671581983,
+        "gamma_deviance": 0.12260230866670388,
+        "calibration_ratio": 1.04954471631135,
+        "gini": 0.9538825249453681,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          2541.2919264711177,
+          4144.309145464568
+        ],
+        "mae": [
+          1696.5476539476758,
+          2335.5409444217858
+        ],
+        "r2": [
+          0.8774401182819713,
+          0.955876137062914
+        ]
+      },
+      "fit_seconds": 0.56
     },
-    "GLM Gamma log": {
-      "cv_rmse": 6213.311951316381,
-      "cv_mae": 3655.9862012054014,
-      "cv_r2": 0.7142154263383773,
-      "test_rmse": 5590.198170475578,
-      "test_mae": 3448.9182564895277,
-      "test_r2": 0.8299358677044858
+    "Ridge cible log": {
+      "family": "Linéaire",
+      "rationale": "Cible log + correction de Duan, pour tester l'échelle multiplicative.",
+      "cv_rmse": 5862.502556229418,
+      "cv_rmse_std": 414.95941892865034,
+      "cv_mae": 3667.5349701353434,
+      "cv_r2": 0.7591317980720376,
+      "cv_fold_rmse": [
+        5170.837458316393,
+        5760.09116593273,
+        5883.9048495392335,
+        6440.016446679277,
+        6057.662860679453
+      ],
+      "best_params": {
+        "alpha": 0.001
+      },
+      "n_configs": 13,
+      "test": {
+        "rmse": 5380.600074578271,
+        "mae": 3405.6711015020774,
+        "r2": 0.7991692848463823,
+        "gamma_deviance": 0.11837527729485857,
+        "calibration_ratio": 1.1456252946710137,
+        "gini": 0.9442696267138259,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          4521.598544239974,
+          6221.569886941948
+        ],
+        "mae": [
+          2947.4050809784794,
+          3913.6019137559792
+        ],
+        "r2": [
+          0.7402174724159464,
+          0.8511523973719332
+        ]
+      },
+      "fit_seconds": 0.6
+    },
+    "GLM Gamma (lien log)": {
+      "family": "GLM actuariel",
+      "rationale": "Standard actuariel des montants : variance ∝ moyenne², effets multiplicatifs lisibles comme des coefficients tarifaires.",
+      "cv_rmse": 5110.817703189314,
+      "cv_rmse_std": 536.6448860274388,
+      "cv_mae": 3098.444253689436,
+      "cv_r2": 0.8155065992220635,
+      "cv_fold_rmse": [
+        4697.80831892284,
+        5592.661090498443,
+        4262.0925216397145,
+        5580.573405080326,
+        5420.953179805243
+      ],
+      "best_params": {
+        "alpha": 0.0001
+      },
+      "n_configs": 9,
+      "test": {
+        "rmse": 4312.590040017703,
+        "mae": 2697.7054207217247,
+        "r2": 0.8709835584596034,
+        "gamma_deviance": 0.13488603360936108,
+        "calibration_ratio": 1.0595615873100415,
+        "gini": 0.9432515402514642,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          3511.852543625913,
+          5087.95374274757
+        ],
+        "mae": [
+          2328.9133178439997,
+          3109.0269967392383
+        ],
+        "r2": [
+          0.8246391859983468,
+          0.9101699741742758
+        ]
+      },
+      "fit_seconds": 0.51
     },
     "Random Forest": {
-      "cv_rmse": 4676.885331984946,
-      "cv_mae": 2606.476720519881,
-      "cv_r2": 0.837026946222154,
-      "test_rmse": 4413.640209496214,
-      "test_mae": 2438.9007154089777,
-      "test_r2": 0.8939886963701792
+      "family": "Arbres",
+      "rationale": "Bagging d'arbres : capte interactions et non-linéarités sans feature engineering.",
+      "cv_rmse": 4705.205471486065,
+      "cv_rmse_std": 658.6071418193329,
+      "cv_mae": 2711.9581033681116,
+      "cv_r2": 0.8429670124756841,
+      "cv_fold_rmse": [
+        4389.874504243729,
+        5213.2039503467195,
+        3554.2404017996887,
+        5301.471854475821,
+        5067.236646564368
+      ],
+      "best_params": {
+        "max_depth": 6,
+        "max_features": 0.7,
+        "min_samples_leaf": 6,
+        "n_estimators": 253
+      },
+      "n_configs": 30,
+      "test": {
+        "rmse": 3376.4078545169473,
+        "mae": 2082.415089881829,
+        "r2": 0.9209178419865756,
+        "gamma_deviance": 0.12597600742274095,
+        "calibration_ratio": 1.0529028102048459,
+        "gini": 0.9487684187986912,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          2631.331118141542,
+          4132.975130422603
+        ],
+        "mae": [
+          1791.2404834127783,
+          2424.1711470578775
+        ],
+        "r2": [
+          0.8760686631413158,
+          0.9536434927376594
+        ]
+      },
+      "fit_seconds": 29.88
     },
-    "Gradient Boosting": {
-      "cv_rmse": 4641.259656139386,
-      "cv_mae": 1712.339963809071,
-      "cv_r2": 0.8391131852326972,
-      "test_rmse": 4282.844442244464,
-      "test_mae": 1555.6324389028757,
-      "test_r2": 0.9001787689990917
+    "XGBoost": {
+      "family": "Boosting",
+      "rationale": "Gradient boosting régularisé, souvent l'état de l'art sur données tabulaires.",
+      "cv_rmse": 4704.154809352928,
+      "cv_rmse_std": 677.1857848760624,
+      "cv_mae": 2747.2771376409796,
+      "cv_r2": 0.843546603628929,
+      "cv_fold_rmse": [
+        4359.7474507011675,
+        5117.426499204726,
+        3538.736178266402,
+        5400.885261518177,
+        5103.978657074166
+      ],
+      "best_params": {
+        "colsample_bytree": 0.9630265895704372,
+        "learning_rate": 0.021102634054601693,
+        "max_depth": 2,
+        "min_child_weight": 15,
+        "n_estimators": 370,
+        "reg_lambda": 0.2932580679871673,
+        "subsample": 0.9771414282231924
+      },
+      "n_configs": 30,
+      "test": {
+        "rmse": 3402.743056749488,
+        "mae": 2105.539366967263,
+        "r2": 0.9196793857406902,
+        "gamma_deviance": 0.11871870699350431,
+        "calibration_ratio": 1.046314857181242,
+        "gini": 0.9504128260867672,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          2642.567906644193,
+          4178.680714448673
+        ],
+        "mae": [
+          1813.1045303061849,
+          2451.4677371133726
+        ],
+        "r2": [
+          0.8757407597646124,
+          0.9520121494219407
+        ]
+      },
+      "fit_seconds": 7.84
+    },
+    "LightGBM": {
+      "family": "Boosting",
+      "rationale": "Boosting par histogrammes, croissance par feuilles ; rapide et léger à déployer.",
+      "cv_rmse": 4716.749634166247,
+      "cv_rmse_std": 628.7269631986579,
+      "cv_mae": 2706.094862802923,
+      "cv_r2": 0.842548812157364,
+      "cv_fold_rmse": [
+        4397.285290339633,
+        5154.324534526569,
+        3631.153845793352,
+        5335.449017638803,
+        5065.535482532879
+      ],
+      "best_params": {
+        "colsample_bytree": 0.7888859700647797,
+        "learning_rate": 0.014308552498147852,
+        "min_child_samples": 18,
+        "n_estimators": 842,
+        "num_leaves": 4,
+        "reg_lambda": 4.57847953130545,
+        "subsample": 0.6943939678995823,
+        "subsample_freq": 1
+      },
+      "n_configs": 30,
+      "test": {
+        "rmse": 3463.3205762943835,
+        "mae": 2127.289834701258,
+        "r2": 0.9167941053869549,
+        "gamma_deviance": 0.12152580440094077,
+        "calibration_ratio": 1.0505099387649361,
+        "gini": 0.9473263955011314,
+        "share_negative_predictions": 0.0
+      },
+      "test_ci95": {
+        "rmse": [
+          2716.299385574873,
+          4221.483682517518
+        ],
+        "mae": [
+          1823.4630506969597,
+          2480.572905543252
+        ],
+        "r2": [
+          0.8721226521893841,
+          0.950251811773282
+        ]
+      },
+      "fit_seconds": 5.73
     }
+  },
+  "best_vs_runner_up": {
+    "best": "Lasso",
+    "runner_up": "Ridge",
+    "mean_diff": -23.261850132912915,
+    "ci95": [
+      -51.2379270287088,
+      3.80253051702347
+    ],
+    "prob_a_better": 0.95
+  },
+  "glm_coefficients": {
+    "intercept_base_cost": 8740.892800054673,
+    "relativities": {
+      "age": 1.5828327408681124,
+      "bmi": 0.9828103848948494,
+      "children": 1.1242026641312652,
+      "obese": 1.0249909764788896,
+      "smoker_obese": 1.1556239462155078,
+      "bmi_smoker": 1.3302241589422055,
+      "age_smoker": 0.6576585902024195,
+      "age_sq": 1.005790052530675,
+      "sex_male": 0.9179757595207888,
+      "smoker_yes": 4.223309073238493,
+      "region_northeast": 0.9978998645146866,
+      "region_northwest": 0.9357145138491718,
+      "region_southeast": 0.8661205885179529,
+      "region_southwest": 0.8191755697110962
+    }
+  },
+  "split": {
+    "n_train": 1069,
+    "n_test": 268,
+    "smoker_share_train": 0.2048643592142189,
+    "smoker_share_test": 0.20522388059701493
+  },
+  "residuals": {
+    "mean_residual": -642.7309137430221,
+    "median_residual": -1409.0311558058384,
+    "skewness": 4.292938747925887,
+    "share_abs_error_gt_10k": 0.033582089552238806,
+    "share_underpredicted_gt_10k": 0.033582089552238806,
+    "heteroscedasticity_spearman": {
+      "rho": -0.493168029845055,
+      "p_value": 7.844374563363703e-18
+    },
+    "mae_by_smoker": {
+      "no": 2134.592496983755,
+      "yes": 1439.5494423779583
+    },
+    "large_errors_smoker_share": 0.2222222222222222,
+    "calibration_by_decile": {
+      "pred": [
+        3564.5,
+        4687.6,
+        6208.0,
+        7467.8,
+        9580.4,
+        11151.4,
+        12677.5,
+        14807.0,
+        23336.8,
+        42452.8
+      ],
+      "obs": [
+        1870.2,
+        3737.5,
+        5067.5,
+        5830.9,
+        10292.4,
+        10066.6,
+        12331.5,
+        14633.4,
+        23797.0,
+        41881.5
+      ]
+    }
+  },
+  "residuals_glm": {
+    "mean_residual": -772.6772153703457,
+    "median_residual": -1464.858941286967,
+    "skewness": 2.0897456136389745,
+    "share_abs_error_gt_10k": 0.05970149253731343,
+    "share_underpredicted_gt_10k": 0.04477611940298507,
+    "heteroscedasticity_spearman": {
+      "rho": 0.23518512861530863,
+      "p_value": 0.00010157114864492283
+    },
+    "mae_by_smoker": {
+      "no": 2202.417899713636,
+      "yes": 4615.818911171229
+    },
+    "large_errors_smoker_share": 0.4375,
+    "calibration_by_decile": {
+      "pred": [
+        3629.7,
+        4525.4,
+        5917.6,
+        7050.1,
+        9236.5,
+        10879.2,
+        12901.1,
+        15802.6,
+        23026.2,
+        44206.5
+      ],
+      "obs": [
+        2194.6,
+        3344.7,
+        5058.8,
+        6362.2,
+        10290.2,
+        10254.8,
+        12627.8,
+        14701.9,
+        22828.1,
+        41806.8
+      ]
+    }
+  },
+  "figures": [
+    {
+      "name": "model_comparison",
+      "title": "Comparaison des modèles"
+    },
+    {
+      "name": "model_cv_folds",
+      "title": "Stabilité en validation croisée"
+    },
+    {
+      "name": "residuals",
+      "title": "Analyse des résidus"
+    },
+    {
+      "name": "calibration_lorenz",
+      "title": "Calibration et Lorenz"
+    }
+  ],
+  "model_card": {
+    "model": "Lasso",
+    "features": [
+      "age",
+      "sex",
+      "bmi",
+      "children",
+      "smoker",
+      "region"
+    ],
+    "target": "charges (USD/an)",
+    "selection": "RMSE de validation croisée 5 plis (train)",
+    "cv_rmse": 4597.095219958297,
+    "test_metrics": {
+      "rmse": 3345.2370217220723,
+      "mae": 1991.9530641355507,
+      "r2": 0.9223712671581983,
+      "gamma_deviance": 0.12260230866670388,
+      "calibration_ratio": 1.04954471631135,
+      "gini": 0.9538825249453681,
+      "share_negative_predictions": 0.0
+    },
+    "params": {
+      "alpha": 46.41588833612777
+    },
+    "trained_on_rows": 1069,
+    "versions": {
+      "scikit-learn": "1.6.1",
+      "lightgbm": "4.6.0",
+      "numpy": "2.1.3",
+      "pandas": "2.2.3"
+    },
+    "size_kb": 2.1,
+    "intended_use": "Démonstration pédagogique. Ne pas utiliser pour une décision tarifaire ou médicale individuelle."
   }
 }
