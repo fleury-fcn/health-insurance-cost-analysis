@@ -1,3 +1,6 @@
 """Reproducible health insurance cost analysis."""
 
-RANDOM_STATE = 42
+from .config import RANDOM_STATE
+
+__all__ = ["RANDOM_STATE"]
+__version__ = "2.0.0"
