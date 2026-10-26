@@ -1,0 +1,35 @@
+{
+  "model": "Lasso",
+  "features": [
+    "age",
+    "sex",
+    "bmi",
+    "children",
+    "smoker",
+    "region"
+  ],
+  "target": "charges (USD/an)",
+  "selection": "RMSE de validation croisée 5 plis (train)",
+  "cv_rmse": 4597.095219958297,
+  "test_metrics": {
+    "rmse": 3345.2370217220723,
+    "mae": 1991.9530641355507,
+    "r2": 0.9223712671581983,
+    "gamma_deviance": 0.12260230866670388,
+    "calibration_ratio": 1.04954471631135,
+    "gini": 0.9538825249453681,
+    "share_negative_predictions": 0.0
+  },
+  "params": {
+    "alpha": 46.41588833612777
+  },
+  "trained_on_rows": 1069,
+  "versions": {
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3"
+  },
+  "size_kb": 2.1,
+  "intended_use": "Démonstration pédagogique. Ne pas utiliser pour une décision tarifaire ou médicale individuelle."
+}

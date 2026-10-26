@@ -29,6 +29,7 @@ data/processed/*
 # Models: only the light production model is versioned (demo dependency)
 models/*
 !models/best_model.joblib
+!models/model_card.json
 *.pkl
 
 # Generated artifacts: keep summaries and figures, not experiment stores
