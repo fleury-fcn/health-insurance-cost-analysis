@@ -11,8 +11,14 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/processed/insurance_clean.csv
 models/*
+!models/best_model.joblib
 artifacts/*
+!artifacts/metrics.json
+!artifacts/statistics.json
+!artifacts/subgroup_errors.json
+!artifacts/eda_distributions.png
 reports/generated/*
 *.joblib
 *.pkl

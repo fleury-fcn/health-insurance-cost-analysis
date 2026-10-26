@@ -9,7 +9,6 @@ plotly==5.24.1
 scikit-learn==1.6.1
 scipy==1.15.1
 seaborn==0.13.2
-shap==0.46.0
 streamlit==1.41.1
 uvicorn==0.34.0
 xgboost==2.1.3
