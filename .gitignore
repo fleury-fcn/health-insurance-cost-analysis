@@ -20,7 +20,9 @@ artifacts/*
 !artifacts/subgroup_errors.json
 !artifacts/eda_distributions.png
 reports/generated/*
+!reports/generated/report.html
 *.joblib
+!models/best_model.joblib
 *.pkl
 *.parquet
 

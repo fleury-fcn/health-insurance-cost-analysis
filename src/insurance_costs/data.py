@@ -35,7 +35,7 @@ def audit(df: pd.DataFrame) -> dict:
     }
 
 
-def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+def clean_data(df: pd.DataFrame, output_path: Path = PROCESSED_DATA) -> pd.DataFrame:
     missing_columns = set(EXPECTED_COLUMNS) - set(df.columns)
     if missing_columns:
         raise ValueError(f"Colonnes manquantes: {sorted(missing_columns)}")
@@ -44,8 +44,8 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     clean["sex"] = clean["sex"].astype("category")
     clean["smoker"] = clean["smoker"].astype("category")
     clean["region"] = clean["region"].astype("category")
-    PROCESSED_DATA.parent.mkdir(parents=True, exist_ok=True)
-    clean.to_csv(PROCESSED_DATA, index=False)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    clean.to_csv(output_path, index=False)
     return clean
 
 
