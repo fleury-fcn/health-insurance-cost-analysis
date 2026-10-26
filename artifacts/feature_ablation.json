@@ -1,0 +1,52 @@
+{
+  "Ridge - variables brutes": {
+    "cv_rmse": 6297.1595035403425,
+    "cv_r2": 0.7225022167546279,
+    "delta_rmse_vs_full": 1690.341680627368
+  },
+  "Ridge - avec interactions": {
+    "cv_rmse": 4606.817822912974,
+    "cv_r2": 0.84920067279618,
+    "delta_rmse_vs_full": 0.0
+  },
+  "Ridge log (smearing) - variables brutes": {
+    "cv_rmse": 9744.776307688673,
+    "cv_r2": 0.34067818557730767,
+    "delta_rmse_vs_full": 5137.958484775699
+  },
+  "Ridge log (smearing) - avec interactions": {
+    "cv_rmse": 6115.83120691961,
+    "cv_r2": 0.7392674929962286,
+    "delta_rmse_vs_full": 1509.0133840066355
+  },
+  "Ridge log (smearing) - interactions sans age_smoker": {
+    "cv_rmse": 10169.00375106213,
+    "cv_r2": 0.28680843202190764,
+    "delta_rmse_vs_full": 5562.185928149155
+  },
+  "Ridge - interactions sans obese": {
+    "cv_rmse": 4591.425468460744,
+    "cv_r2": 0.8502357549177294,
+    "delta_rmse_vs_full": -15.392354452230393
+  },
+  "Ridge - interactions sans smoker_obese": {
+    "cv_rmse": 4953.018319039956,
+    "cv_r2": 0.8260542140595971,
+    "delta_rmse_vs_full": 346.2004961269813
+  },
+  "Ridge - interactions sans bmi_smoker": {
+    "cv_rmse": 4667.312540466502,
+    "cv_r2": 0.845482763184837,
+    "delta_rmse_vs_full": 60.49471755352715
+  },
+  "Ridge - interactions sans age_smoker": {
+    "cv_rmse": 4601.766695442876,
+    "cv_r2": 0.8495250856365457,
+    "delta_rmse_vs_full": -5.051127470098436
+  },
+  "Ridge - interactions sans age_sq": {
+    "cv_rmse": 4656.6453694308275,
+    "cv_r2": 0.8461035238487499,
+    "delta_rmse_vs_full": 49.82754651785308
+  }
+}

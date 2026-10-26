@@ -22,11 +22,11 @@ disparaît avec les tests robustes (Kruskal-Wallis p = 0,20).
 | Question | Test retenu | p | Taille d'effet | Lecture |
 |----------|-------------|---|----------------|---------|
 | Fumeurs vs non-fumeurs | Mann-Whitney, Welch, bootstrap | < 0,001 | g = 3,16 ; r rang-bisérial = 0,95 | +23 610 $ (IC 95 % [22 186 ; 25 039]) : effet massif |
-| Hommes vs femmes (brut) | Mann-Whitney | 0,69 | g ≈ 0,08 | pas d'écart robuste |
+| Hommes vs femmes (brut) | Mann-Whitney | 0,69 | g = 0,12 | pas d'écart robuste |
 | Hommes vs femmes (ajusté) | F partiel, log-OLS | < 0,001 | η²p = 0,010 | −8,3 % pour un homme à profil égal (confusion par le tabagisme) |
 | Région (brut) | Kruskal-Wallis / Alexander-Govern | 0,20 / 0,053 | η² = 0,007 | négligeable |
 | Région (ajusté) | F partiel, log-OLS | < 0,001 | η²p = 0,019 | sud-est −13,9 %, sud-ouest −12,8 % vs nord-est |
-| Enfants | Kruskal-Wallis | < 0,001 | ε² faible | effet modeste |
+| Enfants | Kruskal-Wallis | < 0,001 | ε² = 0,018 | effet faible |
 | Tabagisme × région | χ² | 0,064 | V = 0,07 | indépendance non rejetée |
 | Tabagisme × sexe | χ² | 0,006 | V = 0,07 | hommes un peu plus fumeurs |
 | Âge – coûts | Pearson (IC Fisher z) | < 0,001 | r = 0,30 [0,25 ; 0,35] | modéré |
